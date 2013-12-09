@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Irc.Commands</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <div id="content">
+      <h1>
+        Irc.Commands
+        
+      </h1>
+
+      
+
+      <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L1" target="_blank" class="view_source">Source</a>
+
+      
+
+      
+        <h2 id="functions_summary">Functions summary</h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#command!/1">command!(cmd)</a></td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#ctcp!/1">ctcp!(cmd)</a></td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#join!/2">join!(channel, key)</a></td>
+  
+    <td class="summary_synopsis"><p>Send join command to server (join a channel)</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#nick!/1">nick!(nick)</a></td>
+  
+    <td class="summary_synopsis"><p>Send nick to server. (Changes or sets your nick)</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#notice!/2">notice!(nick, msg)</a></td>
+  
+    <td class="summary_synopsis"><p>Send notice to channel or user</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#part!/1">part!(channel)</a></td>
+  
+    <td class="summary_synopsis"><p>Send part command to server (leave a channel)</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#pass!/1">pass!(pwd)</a></td>
+  
+    <td class="summary_synopsis"><p>Send password to server</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#pong1!/1">pong1!(nick)</a></td>
+  
+    <td class="summary_synopsis"><p>Send PONG in response to PING</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#pong2!/2">pong2!(nick, to)</a></td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#privmsg!/2">privmsg!(nick, msg)</a></td>
+  
+    <td class="summary_synopsis"><p>Send message to channel or user</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#quit!/1">quit!(msg)</a></td>
+  
+    <td class="summary_synopsis"><p>Send quit command to server (disconnect from server)</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#send!/2">send!(socket, data)</a></td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#user!/2">user!(user, name)</a></td>
+  
+    <td class="summary_synopsis"><p>Send username to server. (Changes or sets your username)</p>
+</td>
+  
+</tr>
+
+        </table>
+      
+
+      
+
+      
+
+      
+
+      
+        <div id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <div class="detail">
+  <p class="signature" id="command!/1">
+    <strong>command!(cmd)</strong>
+  </p>
+  
+  <div class="docstring"></div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L167" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="ctcp!/1">
+    <strong>ctcp!(cmd)</strong>
+  </p>
+  
+  <div class="docstring"></div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L169" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="join!/2">
+    <strong>join!(channel, key)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send join command to server (join a channel)</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L213" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="nick!/1">
+    <strong>nick!(nick)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send nick to server. (Changes or sets your nick)</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L182" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="notice!/2">
+    <strong>notice!(nick, msg)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send notice to channel or user</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L207" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="part!/1">
+    <strong>part!(channel)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send part command to server (leave a channel)</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L219" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="pass!/1">
+    <strong>pass!(pwd)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send password to server</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L177" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="pong1!/1">
+    <strong>pong1!(nick)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send PONG in response to PING</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L193" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="pong2!/2">
+    <strong>pong2!(nick, to)</strong>
+  </p>
+  
+  <div class="docstring"></div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L195" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="privmsg!/2">
+    <strong>privmsg!(nick, msg)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send message to channel or user</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L201" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="quit!/1">
+    <strong>quit!(msg)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send quit command to server (disconnect from server)</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L224" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="send!/2">
+    <strong>send!(socket, data)</strong>
+  </p>
+  
+  <div class="docstring"></div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L163" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="user!/2">
+    <strong>user!(user, name)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send username to server. (Changes or sets your username)</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L187" target="_blank" class="view_source">Source</a>
+  
+</div>
+
+        </div>
+      
+
+      
+
+      
+    </div>
+  </body>
+</html>

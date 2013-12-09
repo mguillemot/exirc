@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ExIrc.Client</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <div id="content">
+      <h1>
+        ExIrc.Client
+        
+      </h1>
+
+      
+        <div id="moduledoc" class="docstring">
+          <p>Maintains the state and behaviour for individual IRC client connections</p>
+
+        </div>
+      
+
+      <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L1" target="_blank" class="view_source">Source</a>
+
+      
+
+      
+        <h2 id="functions_summary">Functions summary</h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#add_handler/2">add_handler(client, pid)</a></td>
+  
+    <td class="summary_synopsis"><p>Add a new event handler process</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#add_handler_async/2">add_handler_async(client, pid)</a></td>
+  
+    <td class="summary_synopsis"><p>Add a new event handler process, asynchronously</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#channel_has_user?/3">channel_has_user?(client, channel, nick)</a></td>
+  
+    <td class="summary_synopsis"><p>Determine if a nick is present in the provided channel</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#channel_topic/2">channel_topic(client, channel)</a></td>
+  
+    <td class="summary_synopsis"><p>Get the topic of the provided channel</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#channel_type/2">channel_type(client, channel)</a></td>
+  
+    <td class="summary_synopsis"><p>Get the channel type of the provided channel</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#channel_users/2">channel_users(client, channel)</a></td>
+  
+    <td class="summary_synopsis"><p>Get a list of users in the provided channel</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#channels/1">channels(client)</a></td>
+  
+    <td class="summary_synopsis"><p>Get details about each of the client&#39;s currently joined channels</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#cmd/2">cmd(client, raw_cmd)</a></td>
+  
+    <td class="summary_synopsis"><p>Send a raw IRC command</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#code_change/3">code_change(_old, state, _extra)</a></td>
+  
+    <td class="summary_synopsis"><p>Transform state for hot upgrades/downgrades</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#connect!/3">connect!(client, server, port)</a></td>
+  
+    <td class="summary_synopsis"><p>Connect to a server with the provided server and port</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#handle_call/3">handle_call(arg1, _from, state)</a></td>
+  
+    <td class="summary_synopsis"><p>Handles call to determine if a nick is present in the given channel</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#handle_cast/2">handle_cast(arg1, state)</a></td>
+  
+    <td class="summary_synopsis"><p>Handles message to remove an event handler process asynchronously</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#handle_data/2">handle_data(msg, state)</a></td>
+  
+    <td class="summary_synopsis"><p>Called any time we receive an unrecognized message</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#handle_info/2">handle_info(arg1, state)</a></td>
+  
+    <td class="summary_synopsis"><p>Catch-all for unrecognized messages (do nothing)</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#init/1">init(options // [])</a></td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#is_connected?/1">is_connected?(client)</a></td>
+  
+    <td class="summary_synopsis"><p>Determine if the provided client process has an open connection to a server</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#is_logged_on?/1">is_logged_on?(client)</a></td>
+  
+    <td class="summary_synopsis"><p>Determine if the provided client is logged on to a server</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#join/3">join(client, channel, key // &quot;&quot;)</a></td>
+  
+    <td class="summary_synopsis"><p>Join a channel, with an optional password</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#logon/5">logon(client, pass, nick, user, name)</a></td>
+  
+    <td class="summary_synopsis"><p>Logon to a server</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#msg/4">msg(client, type, nick, msg)</a></td>
+  
+    <td class="summary_synopsis"><p>Send a message to a nick or channel
+Message types are:
+  :privmsg
+  :notice
+  :ctcp</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#nick/2">nick(client, new_nick)</a></td>
+  
+    <td class="summary_synopsis"><p>Change the client&#39;s nick</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#part/2">part(client, channel)</a></td>
+  
+    <td class="summary_synopsis"><p>Leave a channel</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#quit/2">quit(client, msg // [76, 101, 97, 118, 105, 110, 103, 46, 46])</a></td>
+  
+    <td class="summary_synopsis"><p>Quit the server, with an optional part message</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#remove_handler/2">remove_handler(client, pid)</a></td>
+  
+    <td class="summary_synopsis"><p>Remove an event handler process</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#remove_handler_async/2">remove_handler_async(client, pid)</a></td>
+  
+    <td class="summary_synopsis"><p>Remove an event handler process, asynchronously</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#start!/1">start!(options // [])</a></td>
+  
+    <td class="summary_synopsis"><p>Start a new IRC client process</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#start_link/1">start_link(options // [])</a></td>
+  
+    <td class="summary_synopsis"><p>Start a new IRC client process.</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#state/1">state(client)</a></td>
+  
+    <td class="summary_synopsis"><p>Get the current state of the provided client</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#stop!/1">stop!(client)</a></td>
+  
+    <td class="summary_synopsis"><p>Stop the IRC client process</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#terminate/2">terminate(_reason, state)</a></td>
+  
+    <td class="summary_synopsis"><p>Handle termination</p>
+</td>
+  
+</tr>
+
+        </table>
+      
+
+      
+
+      
+
+      
+
+      
+        <div id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <div class="detail">
+  <p class="signature" id="add_handler/2">
+    <strong>add_handler(client, pid)</strong>
+  </p>
+  
+  <div class="docstring"><p>Add a new event handler process</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L173" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="add_handler_async/2">
+    <strong>add_handler_async(client, pid)</strong>
+  </p>
+  
+  <div class="docstring"><p>Add a new event handler process, asynchronously</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L179" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="channel_has_user?/3">
+    <strong>channel_has_user?(client, channel, nick)</strong>
+  </p>
+  
+  <div class="docstring"><p>Determine if a nick is present in the provided channel</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L167" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="channel_topic/2">
+    <strong>channel_topic(client, channel)</strong>
+  </p>
+  
+  <div class="docstring"><p>Get the topic of the provided channel</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L155" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="channel_type/2">
+    <strong>channel_type(client, channel)</strong>
+  </p>
+  
+  <div class="docstring"><p>Get the channel type of the provided channel</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L161" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="channel_users/2">
+    <strong>channel_users(client, channel)</strong>
+  </p>
+  
+  <div class="docstring"><p>Get a list of users in the provided channel</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L149" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="channels/1">
+    <strong>channels(client)</strong>
+  </p>
+  
+  <div class="docstring"><p>Get details about each of the client&#39;s currently joined channels</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L143" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="cmd/2">
+    <strong>cmd(client, raw_cmd)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send a raw IRC command</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L119" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="code_change/3">
+    <strong>code_change(_old, state, _extra)</strong>
+  </p>
+  
+  <div class="docstring"><p>Transform state for hot upgrades/downgrades</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L437" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="connect!/3">
+    <strong>connect!(client, server, port)</strong>
+  </p>
+  
+  <div class="docstring"><p>Connect to a server with the provided server and port</p>
+
+<p>Example:
+  Client.connect! pid, &quot;localhost&quot;, 6667</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L76" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="handle_call/3">
+    <strong>handle_call(arg1, _from, state)</strong>
+  </p>
+  
+  <div class="docstring"><p>Handles call to determine if a nick is present in the given channel</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L238" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="handle_cast/2">
+    <strong>handle_cast(arg1, state)</strong>
+  </p>
+  
+  <div class="docstring"><p>Handles message to remove an event handler process asynchronously</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L367" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="handle_data/2">
+    <strong>handle_data(msg, state)</strong>
+  </p>
+  
+  <div class="docstring"><p>Called any time we receive an unrecognized message</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L446" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="handle_info/2">
+    <strong>handle_info(arg1, state)</strong>
+  </p>
+  
+  <div class="docstring"><p>Catch-all for unrecognized messages (do nothing)</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L381" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="init/1">
+    <strong>init(options // [])</strong>
+  </p>
+  
+  <div class="docstring"></div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L220" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="is_connected?/1">
+    <strong>is_connected?(client)</strong>
+  </p>
+  
+  <div class="docstring"><p>Determine if the provided client process has an open connection to a server</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L82" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="is_logged_on?/1">
+    <strong>is_logged_on?(client)</strong>
+  </p>
+  
+  <div class="docstring"><p>Determine if the provided client is logged on to a server</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L97" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="join/3">
+    <strong>join(client, channel, key // &quot;&quot;)</strong>
+  </p>
+  
+  <div class="docstring"><p>Join a channel, with an optional password</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L125" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="logon/5">
+    <strong>logon(client, pass, nick, user, name)</strong>
+  </p>
+  
+  <div class="docstring"><p>Logon to a server</p>
+
+<p>Example:
+  Client.logon pid, &quot;password&quot;, &quot;mynick&quot;, &quot;username&quot;, &quot;My Name&quot;</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L91" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="msg/4">
+    <strong>msg(client, type, nick, msg)</strong>
+  </p>
+  
+  <div class="docstring"><p>Send a message to a nick or channel
+Message types are:
+  :privmsg
+  :notice
+  :ctcp</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L107" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="nick/2">
+    <strong>nick(client, new_nick)</strong>
+  </p>
+  
+  <div class="docstring"><p>Change the client&#39;s nick</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L113" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="part/2">
+    <strong>part(client, channel)</strong>
+  </p>
+  
+  <div class="docstring"><p>Leave a channel</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L131" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="quit/2">
+    <strong>quit(client, msg // [76, 101, 97, 118, 105, 110, 103, 46, 46])</strong>
+  </p>
+  
+  <div class="docstring"><p>Quit the server, with an optional part message</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L137" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="remove_handler/2">
+    <strong>remove_handler(client, pid)</strong>
+  </p>
+  
+  <div class="docstring"><p>Remove an event handler process</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L185" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="remove_handler_async/2">
+    <strong>remove_handler_async(client, pid)</strong>
+  </p>
+  
+  <div class="docstring"><p>Remove an event handler process, asynchronously</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L191" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="start!/1">
+    <strong>start!(options // [])</strong>
+  </p>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>start!(options :: [] | nil) :: {:ok, pid} | {:error, term}</li>
+      
+        <li>start!(options :: [] | nil) :: {:ok, pid} | {:error, term}</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Start a new IRC client process</p>
+
+<p>Returns either {:ok, pid} or {:error, reason}</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L51" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="start_link/1">
+    <strong>start_link(options // [])</strong>
+  </p>
+  
+  <div class="docstring"><p>Start a new IRC client process.</p>
+
+<p>Returns either {:ok, pid} or {:error, reason}</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L60" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="state/1">
+    <strong>state(client)</strong>
+  </p>
+  
+  <div class="docstring"><p>Get the current state of the provided client</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L197" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="stop!/1">
+    <strong>stop!(client)</strong>
+  </p>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>stop!(client :: pid) :: {:stop, :normal, :ok, ExIrc.Client.ClientState.t}</li>
+      
+    </ul>
+  
+  <div class="docstring"><p>Stop the IRC client process</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L67" target="_blank" class="view_source">Source</a>
+  
+</div>
+<div class="detail">
+  <p class="signature" id="terminate/2">
+    <strong>terminate(_reason, state)</strong>
+  </p>
+  
+  <div class="docstring"><p>Handle termination</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/client.ex#L427" target="_blank" class="view_source">Source</a>
+  
+</div>
+
+        </div>
+      
+
+      
+
+      
+    </div>
+  </body>
+</html>
