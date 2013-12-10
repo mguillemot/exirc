@@ -35,7 +35,7 @@
         <h2 id="functions_summary">Functions summary</h2>
         <table class="summary">
           <tr>
-  <td class="summary_signature"><a href="#ctcp_time/1">ctcp_time(arg1)</a></td>
+  <td class="summary_signature"><a href="#ctcp_time/1">ctcp_time(_datetime)</a></td>
   
     <td class="summary_synopsis"><p>Get CTCP formatted time from a tuple representing the current calendar time:</p>
 </td>
@@ -44,16 +44,15 @@
 <tr>
   <td class="summary_signature"><a href="#isup/2">isup(list1, state)</a></td>
   
+    <td class="summary_synopsis"><p>Parse RPL_ISUPPORT message.</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#parse/1">parse(raw_data)</a></td>
   
     <td class="summary_synopsis"><p>Parse an IRC message</p>
 </td>
-  
-</tr>
-<tr>
-  <td class="summary_signature"><a href="#trim_crlf/1">trim_crlf(charlist)</a></td>
   
 </tr>
 
@@ -71,19 +70,28 @@
           <h2>Functions</h2>
           <div class="detail">
   <p class="signature" id="ctcp_time/1">
-    <strong>ctcp_time(arg1)</strong>
+    <strong>ctcp_time(_datetime)</strong>
   </p>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>ctcp_time(datetime :: {{integer, integer, integer}, {integer, integer, integer}}) :: binary</li>
+      
+    </ul>
   
   <div class="docstring"><p>Get CTCP formatted time from a tuple representing the current calendar time:</p>
 
-<p>Example:
-  iex&gt; local<em>time = {{2013,12,6},{14,5,00}}
-  {{2013,12,6},{14,5,00}}
-  iex&gt; ExIrc.Utils.ctcp</em>time local_time
-  &quot;Fri Dec 06 14:05:00 2013&quot;</p>
+<p>Example:</p>
+
+<pre><code>iex&gt; local_time = {{2013,12,6},{14,5,00}}
+{{2013,12,6},{14,5,00}}
+iex&gt; ExIrc.Utils.ctcp_time local_time
+&quot;Fri Dec 06 14:05:00 2013&quot;
+</code></pre>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/utils.ex#L134" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/utils.ex#L150" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -91,9 +99,20 @@
     <strong>isup(list1, state)</strong>
   </p>
   
-  <div class="docstring"></div>
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>isup(parameters :: [binary], state :: ExIrc.Client.ClientState.t) :: ExIrc.Client.ClientState.t</li>
+      
+    </ul>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/utils.ex#L93" target="_blank" class="view_source">Source</a>
+  <div class="docstring"><p>Parse RPL_ISUPPORT message.</p>
+
+<p>If an empty list is provided, do nothing, otherwise parse CHANTYPES,
+NETWORK, and PREFIX parameters for relevant data.</p>
+</div>
+  
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/utils.ex#L107" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -101,20 +120,24 @@
     <strong>parse(raw_data)</strong>
   </p>
   
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>parse(raw_data :: char_list) :: ExIrc.Client.IrcMessage.t</li>
+      
+    </ul>
+  
   <div class="docstring"><p>Parse an IRC message</p>
+
+<p>Example:</p>
+
+<pre><code>data    = &#39;:irc.example.org 005 nick NETWORK=Freenode PREFIX=(ov)@+ CHANTYPES=#&amp;&#39;
+message = ExIrc.Utils.parse data
+assert &quot;irc.example.org&quot; = message.server
+</code></pre>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/utils.ex#L14" target="_blank" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
-  <p class="signature" id="trim_crlf/1">
-    <strong>trim_crlf(charlist)</strong>
-  </p>
-  
-  <div class="docstring"></div>
-  
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/utils.ex#L150" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/utils.ex#L21" target="_blank" class="view_source">Source</a>
   
 </div>
 

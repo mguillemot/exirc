@@ -42,61 +42,106 @@
           <tr>
   <td class="summary_signature"><a href="#channel_has_user?/3">channel_has_user?(channel_tree, channel_name, nick)</a></td>
   
+    <td class="summary_synopsis"><p>Determine if a user is present in a tracked channel</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#channel_topic/2">channel_topic(channel_tree, channel_name)</a></td>
+  
+    <td class="summary_synopsis"><p>Get the current topic for a tracked channel</p>
+</td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#channel_type/2">channel_type(channel_tree, channel_name)</a></td>
   
+    <td class="summary_synopsis"><p>Get the type of a tracked channel</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#channel_users/2">channel_users(channel_tree, channel_name)</a></td>
+  
+    <td class="summary_synopsis"><p>Get a list of all users in a tracked channel</p>
+</td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#channels/1">channels(channel_tree)</a></td>
   
+    <td class="summary_synopsis"><p>Get a list of all currently tracked channels</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#init/0">init()</a></td>
+  
+    <td class="summary_synopsis"><p>Initialize a new Channels data store</p>
+</td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#join/2">join(channel_tree, channel_name)</a></td>
   
+    <td class="summary_synopsis"><p>Add a channel to the data store when joining a channel</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#part/2">part(channel_tree, channel_name)</a></td>
+  
+    <td class="summary_synopsis"><p>Remove a channel from the data store when leaving a channel</p>
+</td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#set_topic/3">set_topic(channel_tree, channel_name, topic)</a></td>
   
+    <td class="summary_synopsis"><p>Update the topic for a tracked channel when it changes</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#set_type/3">set_type(channel_tree, channel_name, channel_type)</a></td>
+  
+    <td class="summary_synopsis"><p>Update the type of a tracked channel when it changes</p>
+</td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#to_proplist/1">to_proplist(channel_tree)</a></td>
   
+    <td class="summary_synopsis"><p>Get all channel data as a tuple of the channel name and a proplist of metadata.</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#user_join/3">user_join(channel_tree, channel_name, nick)</a></td>
+  
+    <td class="summary_synopsis"><p>Add a user to a tracked channel when they join</p>
+</td>
   
 </tr>
 <tr>
   <td class="summary_signature"><a href="#user_part/3">user_part(channel_tree, channel_name, nick)</a></td>
   
+    <td class="summary_synopsis"><p>Remove a user from a tracked channel when they leave</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#user_rename/3">user_rename(channel_tree, nick, new_nick)</a></td>
   
+    <td class="summary_synopsis"><p>Update the nick of a user in a tracked channel when they change their nick</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#users_join/3">users_join(channel_tree, channel_name, nicks)</a></td>
+  
+    <td class="summary_synopsis"><p>Add multiple users to a tracked channel (used primarily in conjunction with the NAMES command)</p>
+</td>
   
 </tr>
 
@@ -117,9 +162,10 @@
     <strong>channel_has_user?(channel_tree, channel_name, nick)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Determine if a user is present in a tracked channel</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L132" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L178" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -127,9 +173,10 @@
     <strong>channel_topic(channel_tree, channel_name)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Get the current topic for a tracked channel</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L118" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L158" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -137,9 +184,10 @@
     <strong>channel_type(channel_tree, channel_name)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Get the type of a tracked channel</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L125" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L168" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -147,9 +195,10 @@
     <strong>channel_users(channel_tree, channel_name)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Get a list of all users in a tracked channel</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L114" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L151" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -157,9 +206,10 @@
     <strong>channels(channel_tree)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Get a list of all currently tracked channels</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L110" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L144" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -167,9 +217,10 @@
     <strong>init()</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Initialize a new Channels data store</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L16" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L19" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -177,9 +228,10 @@
     <strong>join(channel_tree, channel_name)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Add a channel to the data store when joining a channel</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L23" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L30" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -187,9 +239,10 @@
     <strong>part(channel_tree, channel_name)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Remove a channel from the data store when leaving a channel</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L33" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L43" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -197,9 +250,10 @@
     <strong>set_topic(channel_tree, channel_name, topic)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Update the topic for a tracked channel when it changes</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L46" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L60" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -207,9 +261,10 @@
     <strong>set_type(channel_tree, channel_name, channel_type)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Update the type of a tracked channel when it changes</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L56" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L73" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -217,9 +272,15 @@
     <strong>to_proplist(channel_tree)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Get all channel data as a tuple of the channel name and a proplist of metadata.</p>
+
+<p>Example Result:</p>
+
+<pre><code>[{&quot;#testchannel&quot;, [users: [&quot;userA&quot;, &quot;userB&quot;], topic: &quot;Just a test channel.&quot;, type: :public] }]
+</code></pre>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L136" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L189" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -227,9 +288,10 @@
     <strong>user_join(channel_tree, channel_name, nick)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Add a user to a tracked channel when they join</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L77" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L98" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -237,9 +299,10 @@
     <strong>user_part(channel_tree, channel_name, nick)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Remove a user from a tracked channel when they leave</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L87" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L114" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -247,9 +310,10 @@
     <strong>user_rename(channel_tree, nick, new_nick)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Update the nick of a user in a tracked channel when they change their nick</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L93" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L123" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -257,9 +321,10 @@
     <strong>users_join(channel_tree, channel_name, nicks)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Add multiple users to a tracked channel (used primarily in conjunction with the NAMES command)</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L81" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/channels.ex#L105" target="_blank" class="view_source">Source</a>
   
 </div>
 

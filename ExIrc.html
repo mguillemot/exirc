@@ -29,11 +29,32 @@
         <div id="moduledoc" class="docstring">
           <p>Supervises IRC client processes</p>
 
-<p>Usage:
-  # Start the supervisor (started automatically when ExIrc is run as an application)
-  ExIrc.start<em>link
-  # Start a new IRC client
-  {:ok, client} = ExIrc.start</em>client!</p>
+<p>Usage:</p>
+
+<pre><code># Start the supervisor (started automatically when ExIrc is run as an application)
+ExIrc.start_link
+
+# Start a new IRC client
+{:ok, client} = ExIrc.start_client!
+
+# Connect to an IRC server
+ExIrc.Client.connect! client, &quot;localhost&quot;, 6667
+
+# Logon
+ExIrc.Client.logon client, &quot;password&quot;, &quot;nick&quot;, &quot;user&quot;, &quot;name&quot;
+
+# Join a channel (password is optional)
+ExIrc.Client.join client, &quot;#channel&quot;, &quot;password&quot;
+
+# Send a message
+ExIrc.Client.msg client, :privmsg, &quot;#channel&quot;, &quot;Hello world!&quot;
+
+# Quit (message is optional)
+ExIrc.Client.quit client, &quot;message&quot;
+
+# Stop and close the client connection
+ExIrc.Client.stop! client
+</code></pre>
 
         </div>
       
@@ -84,10 +105,17 @@
     <strong>init(_)</strong>
   </p>
   
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>init(any) :: {:ok, pid} | {:error, term}</li>
+      
+    </ul>
+  
   <div class="docstring"><p>Callback implementation of <a href="http://www.erlang.org/doc/man/supervisor.html#init-1"><code>:supervisor.init/1</code></a>.</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/exirc.ex#L39" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/exirc.ex#L60" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -105,7 +133,7 @@
   <div class="docstring"><p>Start the ExIrc supervisor.</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/exirc.ex#L22" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/exirc.ex#L42" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -123,7 +151,7 @@
   <div class="docstring"><p>Start a new ExIrc client</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/exirc.ex#L30" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/exirc.ex#L50" target="_blank" class="view_source">Source</a>
   
 </div>
 

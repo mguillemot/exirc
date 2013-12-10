@@ -28,8 +28,8 @@
       
         <div id="moduledoc" class="docstring">
           <p>This is an example event handler that you can attach to the client using
-add<em>handler/add</em>handler<em>async. To remove, call remove</em>handler/remove<em>handler</em>async
-with the pid of the handler process.</p>
+<code>add_handler</code> or <code>add_handler_async</code>. To remove, call <code>remove_handler</code> or
+<code>remove_handler_async</code> with the pid of the handler process.</p>
 
         </div>
       
@@ -42,14 +42,9 @@ with the pid of the handler process.</p>
         <h2 id="functions_summary">Functions summary</h2>
         <table class="summary">
           <tr>
-  <td class="summary_signature"><a href="#debug/1">debug(msg)</a></td>
-  
-</tr>
-<tr>
   <td class="summary_signature"><a href="#handle_info/2">handle_info(msg, _state)</a></td>
   
-    <td class="summary_synopsis"><p>Catch all handler for IRC messages, you can define multiple of these with various critiera
-to handle specific messages, such as direct messages, joins, parts, etc.</p>
+    <td class="summary_synopsis"><p>Handle messages from the client</p>
 </td>
   
 </tr>
@@ -79,25 +74,30 @@ to handle specific messages, such as direct messages, joins, parts, etc.</p>
         <div id="functions_details" class="details_list">
           <h2>Functions</h2>
           <div class="detail">
-  <p class="signature" id="debug/1">
-    <strong>debug(msg)</strong>
-  </p>
-  
-  <div class="docstring"></div>
-  
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/example_handler.ex#L43" target="_blank" class="view_source">Source</a>
-  
-</div>
-<div class="detail">
   <p class="signature" id="handle_info/2">
     <strong>handle_info(msg, _state)</strong>
   </p>
   
-  <div class="docstring"><p>Catch all handler for IRC messages, you can define multiple of these with various critiera
-to handle specific messages, such as direct messages, joins, parts, etc.</p>
+  <div class="docstring"><p>Handle messages from the client</p>
+
+<p>Examples:</p>
+
+<pre><code>def handle_info({:connect, server, port}, _state) do
+    IO.puts &quot;Connected to #{server}:#{port}&quot;
+end
+def handle_info({:login, pass, nick, user, name}, _state) do
+    IO.puts &quot;Logged in as nick: #{nick}, user: #{user}, name: #{name}, using password #{pass}&quot;
+end
+def handle_info(IrcMessage[nick: from, cmd: &quot;PRIVMSG&quot;, args: [&quot;mynick&quot;, msg]], _state) do
+    IO.puts &quot;Received a private message from #{from}: #{msg}&quot;
+end
+def handle_info(IrcMessage[nick: from, cmd: &quot;PRIVMSG&quot;, args: [to, msg]], _state) do
+    IO.puts &quot;Received a message in #{to} from #{from}: #{msg}&quot;
+end
+</code></pre>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/example_handler.ex#L22" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/example_handler.ex#L40" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -107,7 +107,7 @@ to handle specific messages, such as direct messages, joins, parts, etc.</p>
   
   <div class="docstring"></div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/example_handler.ex#L15" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/example_handler.ex#L17" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -117,7 +117,7 @@ to handle specific messages, such as direct messages, joins, parts, etc.</p>
   
   <div class="docstring"></div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/example_handler.ex#L7" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/example_handler.ex#L9" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -127,7 +127,7 @@ to handle specific messages, such as direct messages, joins, parts, etc.</p>
   
   <div class="docstring"></div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/example_handler.ex#L11" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/example_handler.ex#L13" target="_blank" class="view_source">Source</a>
   
 </div>
 

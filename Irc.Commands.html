@@ -26,6 +26,11 @@
       </h1>
 
       
+        <div id="moduledoc" class="docstring">
+          <p>Defines IRC command constants, and methods for generating valid commands to send to an IRC server.</p>
+
+        </div>
+      
 
       <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L1" target="_blank" class="view_source">Source</a>
 
@@ -37,9 +42,15 @@
           <tr>
   <td class="summary_signature"><a href="#command!/1">command!(cmd)</a></td>
   
+    <td class="summary_synopsis"><p>Builds a valid IRC command.</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#ctcp!/1">ctcp!(cmd)</a></td>
+  
+    <td class="summary_synopsis"><p>Builds a valid CTCP command.</p>
+</td>
   
 </tr>
 <tr>
@@ -87,6 +98,9 @@
 <tr>
   <td class="summary_signature"><a href="#pong2!/2">pong2!(nick, to)</a></td>
   
+    <td class="summary_synopsis"><p>Send a targeted PONG in response to PING</p>
+</td>
+  
 </tr>
 <tr>
   <td class="summary_signature"><a href="#privmsg!/2">privmsg!(nick, msg)</a></td>
@@ -104,6 +118,9 @@
 </tr>
 <tr>
   <td class="summary_signature"><a href="#send!/2">send!(socket, data)</a></td>
+  
+    <td class="summary_synopsis"><p>Send data to a TCP socket.</p>
+</td>
   
 </tr>
 <tr>
@@ -131,9 +148,10 @@
     <strong>command!(cmd)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Builds a valid IRC command.</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L167" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L184" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -141,9 +159,10 @@
     <strong>ctcp!(cmd)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Builds a valid CTCP command.</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L169" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L189" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -154,7 +173,7 @@
   <div class="docstring"><p>Send join command to server (join a channel)</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L213" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L236" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -165,7 +184,7 @@
   <div class="docstring"><p>Send nick to server. (Changes or sets your nick)</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L182" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L202" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -176,7 +195,7 @@
   <div class="docstring"><p>Send notice to channel or user</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L207" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L230" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -187,7 +206,7 @@
   <div class="docstring"><p>Send part command to server (leave a channel)</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L219" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L242" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -198,7 +217,7 @@
   <div class="docstring"><p>Send password to server</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L177" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L197" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -209,7 +228,7 @@
   <div class="docstring"><p>Send PONG in response to PING</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L193" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L213" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -217,9 +236,10 @@
     <strong>pong2!(nick, to)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Send a targeted PONG in response to PING</p>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L195" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L218" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -230,7 +250,7 @@
   <div class="docstring"><p>Send message to channel or user</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L201" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L224" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -241,7 +261,7 @@
   <div class="docstring"><p>Send quit command to server (disconnect from server)</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L224" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L247" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -249,9 +269,16 @@
     <strong>send!(socket, data)</strong>
   </p>
   
-  <div class="docstring"></div>
+  <div class="docstring"><p>Send data to a TCP socket.</p>
+
+<p>Example:</p>
+
+<pre><code>command = pass! &quot;password&quot;
+send! socket, command
+</code></pre>
+</div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L163" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L177" target="_blank" class="view_source">Source</a>
   
 </div>
 <div class="detail">
@@ -262,7 +289,7 @@
   <div class="docstring"><p>Send username to server. (Changes or sets your username)</p>
 </div>
   
-    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L187" target="_blank" class="view_source">Source</a>
+    <a href="https://github.com/bitwalker/exirc/blob/master/lib/exirc/commands.ex#L207" target="_blank" class="view_source">Source</a>
   
 </div>
 
