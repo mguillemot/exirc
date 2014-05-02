@@ -49,7 +49,9 @@ with.</p>
 <h2>
 <a name="status" class="anchor" href="#status"><span class="octicon octicon-link"></span></a>Status</h2>
 
-<p><a href="https://app.wercker.com/project/bykey/236e4911da7c4575c49b1b20b9ec775d"><img src="https://app.wercker.com/status/236e4911da7c4575c49b1b20b9ec775d/m/" alt="wercker status" title="wercker status"></a></p>
+<p><a href="https://app.wercker.com/project/bykey/236e4911da7c4575c49b1b20b9ec775d"><img src="https://app.wercker.com/status/236e4911da7c4575c49b1b20b9ec775d/m/" alt="wercker
+status" title="wercker
+status"></a></p>
 
 <p>Alpha. The API is complete and everything is implemented, but little testing has been done (I've tested the API against my own local IRC server, but nothing robust enough to call this production ready). Any bugs you find, please report them in the issue tracker and I'll address them as soon as possible. If you have any questions, or if the documentation seems incomplete, let me know and I'll fill it in.</p>
 
@@ -62,7 +64,7 @@ with.</p>
 <p>Add ExIrc as a dependency to your project in mix.exs, and add it as an application:</p>
 
 <div class="highlight highlight-elixir"><pre>  <span class="k">defp</span> <span class="n">deps</span> <span class="k">do</span>
-<span class="k">    </span><span class="p">[{</span><span class="ss">:exirc</span><span class="p">,</span> <span class="ss">github:</span> <span class="s2">"bitwalker/exirc"</span><span class="p">}]</span>
+<span class="k">    </span><span class="p">[{</span><span class="ss">:exirc</span><span class="p">,</span> <span class="s2">"~&gt; 0.4.0"</span><span class="p">}]</span>
   <span class="k">end</span>
 
   <span class="k">defp</span> <span class="n">application</span> <span class="k">do</span>
@@ -79,18 +81,19 @@ expect to receive from the client</strong>. A simple module is defined below as 
 use ExIrc in practice. ExampleHandler here is the one that comes bundled with ExIrc.</p>
 
 <div class="highlight highlight-elixir"><pre><span class="k">defmodule</span> <span class="no">ExampleSupervisor</span> <span class="k">do</span>
-<span class="k">    defrecord</span> <span class="no">State</span><span class="p">,</span> 
-        <span class="ss">host:</span> <span class="s2">"chat.freenode.net"</span><span class="p">,</span>
-        <span class="ss">port:</span> <span class="m">6667</span><span class="p">,</span>
-        <span class="ss">pass:</span> <span class="s2">""</span><span class="p">,</span>
-        <span class="ss">nick:</span> <span class="s2">"bitwalker"</span><span class="p">,</span>
-        <span class="ss">user:</span> <span class="s2">"bitwalker"</span><span class="p">,</span>
-        <span class="ss">name:</span> <span class="s2">"Paul Schoenfelder"</span><span class="p">,</span>
-        <span class="ss">client:</span> <span class="no">nil</span><span class="p">,</span>
-        <span class="ss">handlers:</span> <span class="p">[]</span>
+<span class="k">    defmodule</span> <span class="no">State</span> <span class="k">do</span>
+<span class="k">        </span><span class="n">defstruct</span> <span class="ss">host:</span> <span class="s2">"chat.freenode.net"</span><span class="p">,</span>
+                  <span class="ss">port:</span> <span class="m">6667</span><span class="p">,</span>
+                  <span class="ss">pass:</span> <span class="s2">""</span><span class="p">,</span>
+                  <span class="ss">nick:</span> <span class="s2">"bitwalker"</span><span class="p">,</span>
+                  <span class="ss">user:</span> <span class="s2">"bitwalker"</span><span class="p">,</span>
+                  <span class="ss">name:</span> <span class="s2">"Paul Schoenfelder"</span><span class="p">,</span>
+                  <span class="ss">client:</span> <span class="no">nil</span><span class="p">,</span>
+                  <span class="ss">handlers:</span> <span class="p">[]</span>
+    <span class="k">end</span>
 
     <span class="k">def</span> <span class="n">start_link</span><span class="p">(</span><span class="n">_</span><span class="p">)</span> <span class="k">do</span>
-<span class="k">        </span><span class="ss">:gen_server</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span> <span class="p">[</span><span class="no">State</span><span class="o">.</span><span class="n">new</span><span class="p">()])</span>
+<span class="k">        </span><span class="ss">:gen_server</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="bp">__MODULE__</span><span class="p">,</span> <span class="p">[</span><span class="err">%</span><span class="no">State</span><span class="p">{}])</span>
     <span class="k">end</span>
 
     <span class="k">def</span> <span class="n">init</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="k">do</span>
@@ -107,7 +110,7 @@ use ExIrc in practice. ExampleHandler here is the one that comes bundled with Ex
         <span class="no">ExIrc</span><span class="o">.</span><span class="no">Client</span><span class="o">.</span><span class="n">join</span>       <span class="n">client</span><span class="p">,</span> <span class="s2">"</span><span class="err">#</span><span class="s2">elixir-lang"</span>
         <span class="no">ExIrc</span><span class="o">.</span><span class="no">Client</span><span class="o">.</span><span class="n">msg</span>        <span class="n">client</span><span class="p">,</span> <span class="ss">:privmsg</span><span class="p">,</span> <span class="s2">"</span><span class="err">#</span><span class="s2">elixir-lang"</span><span class="p">,</span> <span class="s2">"Hello world!"</span>
 
-        <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="n">client</span><span class="p">)</span><span class="o">.</span><span class="n">handlers</span><span class="p">([</span><span class="n">handler</span><span class="p">])}</span>
+        <span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="err">%</span><span class="p">{</span><span class="n">state</span> <span class="o">|</span> <span class="ss">:client</span> <span class="o">=&gt;</span> <span class="n">client</span><span class="p">,</span> <span class="ss">:handlers</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="n">handler</span><span class="p">]}}</span>
     <span class="k">end</span>
 
     <span class="k">def</span> <span class="n">terminate</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="k">do</span>
