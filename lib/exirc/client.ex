@@ -662,6 +662,13 @@ defmodule ExIrc.Client do
     send_event {:me, message, from, channel}, state
     {:noreply, state}
   end
+  # Erhune: Called when someone is MOD-ed in Twitch IRC
+  def handle_data(%IrcMessage{cmd: "MODE", nick: sender, args: [channel, mode, user_crlf]} = _msg, state) do
+    user = user_crlf |> String.rstrip(?\n) |> String.rstrip(?\r)
+    if state.debug?, do: debug "* #{sender} sets MODE #{mode} to #{user} in #{channel}"
+    send_event {:mode, sender, user, mode, channel}, state
+    {:noreply, state}
+  end
   # Called any time we receive an unrecognized message
   def handle_data(msg, state) do
     if state.debug? do debug "UNRECOGNIZED MSG: #{msg.cmd}"; IO.inspect(msg) end
