@@ -462,6 +462,8 @@ defmodule ExIrc.Client do
   # General handler for messages from the IRC server
   def handle_info({:tcp, _, data}, state) do
     debug? = state.debug?
+    # IO.puts "???????????????????? #{data}"
+    # IO.puts "!!!!!!!!!!!!!!!!!!!! #{inspect Utils.parse(data)}"
     case Utils.parse(data) do
       %IrcMessage{:ctcp => true} = msg ->
         handle_data msg, state
@@ -643,15 +645,17 @@ defmodule ExIrc.Client do
     {:noreply, state}
   end
   # Called when someone sends us a message
-  def handle_data(%IrcMessage{:nick => from, :cmd => "PRIVMSG", :args => [nick, message]} = _msg, %ClientState{:nick => nick} = state) do
-    if state.debug?, do: debug "#{from} SENT US #{message}"
-    send_event {:received, message, from}, state
+  # Erhune: add IRCv3 tag support
+  def handle_data(%IrcMessage{:nick => from, :cmd => "PRIVMSG", :args => [nick, message], :tags => tags} = _msg, %ClientState{:nick => nick} = state) do
+    if state.debug?, do: debug "#{from} (#{inspect tags}) SENT US #{message}"
+    send_event {:received, message, from, tags}, state
     {:noreply, state}
   end
   # Called when someone sends a message to a channel we're in, or a list of users
-  def handle_data(%IrcMessage{:nick => from, :cmd => "PRIVMSG", :args => [to, message]} = _msg, %ClientState{:nick => nick} = state) do
-    if state.debug?, do: debug "#{from} SENT #{message} TO #{to}"
-    send_event {:received, message, from, to}, state
+  # Erhune: add IRCv3 tag support
+  def handle_data(%IrcMessage{:nick => from, :cmd => "PRIVMSG", :args => [to, message], :tags => tags} = _msg, %ClientState{:nick => nick} = state) do
+    if state.debug?, do: debug "#{from} (#{inspect tags}) SENT #{message} TO #{to}"
+    send_event {:received, message, from, to, tags}, state
     # If we were mentioned, fire that event as well
     if String.contains?(message, nick), do: send_event({:mentioned, message, from, to}, state)
     {:noreply, state}

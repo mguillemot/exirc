@@ -18,10 +18,17 @@ defmodule ExIrc.Utils do
     data = :string.substr(raw_data, 1, length(raw_data))
     case data do
       [?:|_] ->
-          [[?:|from]|rest] = :string.tokens(data, ' ')
-          get_cmd(rest, parse_from(from, %IrcMessage{ctcp: false}))
+        [[?:|from]|rest] = :string.tokens(data, ' ')
+        get_cmd(rest, parse_from(from, %IrcMessage{ctcp: false}))
+      [?@|_] -> # Erhune: support IRCv3 tags
+        [[?@|tags], [?:|from] | rest] = :string.tokens(data, ' ')
+        tags = tags |> List.to_string |> String.split(";") |> Enum.map fn pair ->
+          [tag, value] = String.split(pair, "=")
+          {String.to_atom(tag), value}
+        end
+        get_cmd(rest, parse_from(from, %IrcMessage{ctcp: false, tags: tags}))
       data ->
-          get_cmd(:string.tokens(data, ' '), %IrcMessage{ctcp: false})
+        get_cmd(:string.tokens(data, ' '), %IrcMessage{ctcp: false})
     end
   end
 

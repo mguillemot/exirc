@@ -5,5 +5,6 @@ defmodule IrcMessage do
             host:    '',
             ctcp:    nil,
             cmd:     '',
-            args:    []
+            args:    [],
+            tags:    [] # Erhune: added for IRCv3
 end
