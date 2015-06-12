@@ -462,7 +462,7 @@ defmodule ExIrc.Client do
   # General handler for messages from the IRC server
   def handle_info({:tcp, _, data}, state) do
     debug? = state.debug?
-    # IO.puts "???????????????????? #{data}"
+    IO.puts "???????????????????? #{data}"
     # IO.puts "!!!!!!!!!!!!!!!!!!!! #{inspect Utils.parse(data)}"
     case Utils.parse(data) do
       %IrcMessage{:ctcp => true} = msg ->
@@ -664,6 +664,23 @@ defmodule ExIrc.Client do
   def handle_data(%IrcMessage{:nick => from, :cmd => "ACTION", :args => [channel, message]} = _msg, state) do
     if state.debug?, do: debug "* #{from} #{message} in #{channel}"
     send_event {:me, message, from, channel}, state
+    {:noreply, state}
+  end
+  # Erhune: Called for each present mod when we join a channel in IRCv3 mode
+  def handle_data(%IrcMessage{cmd: "USERSTATE", args: [user_crlf], tags: tags} = _msg, state) do
+    user = user_crlf |> String.rstrip(?\n) |> String.rstrip(?\r)
+    if state.debug?, do: debug "* USERSTATE for #{user} is: #{inspect tags}"
+    # HACK: since no channel is passed, we assume that we are only in ONE channel and that this is the channel the user is initially present in
+    # NOTE: Copied from JOIN
+    # channels  = Channels.user_join(state.channels, channel, user_nick)
+    # new_state = %{state | :channels => channels}
+    # send_event {:joined, channel, user_nick}, new_state
+    {:noreply, state}
+  end
+  # Erhune: Called when we receive a whisp on Twitch group chat servers
+  def handle_data(%IrcMessage{cmd: "WHISPER", args: [_me, msg], user: from, tags: tags} = _msg, state) do
+    if state.debug?, do: debug "* WHISPER from #{from} (#{inspect tags}): #{msg}"
+    send_event {:whisper, from, tags, msg}, state
     {:noreply, state}
   end
   # Erhune: Called when someone is MOD-ed in Twitch IRC
