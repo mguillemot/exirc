@@ -12,7 +12,7 @@ defmodule ExIrc.Mixfile do
 
   # Configuration for the OTP application
   def application do
-    [mod: {ExIrc.App, []}]
+    [mod: {ExIrc.App, []}, applications: [:logger]]
   end
 
   defp package do

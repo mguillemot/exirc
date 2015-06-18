@@ -10,8 +10,7 @@ defmodule ExIrc.Client do
 
   alias ExIrc.Client.Transport, as: Transport
 
-  # Erhune:
-  use MMOTG.Logger, default: :irc_client, trace: :all 
+  require Logger # Erhune
 
   # Client internal state
   defmodule ClientState do
@@ -281,7 +280,7 @@ defmodule ExIrc.Client do
   def init(options \\ []) do
     autoping = Keyword.get(options, :autoping, true)
     debug    = Keyword.get(options, :debug, false)
-    tag_process "IrcClient", Keyword.get(options, :id) # Erhune
+    Logger.metadata(m: "IrcClient", id: Keyword.get(options, :id)) # Erhune
     # Add event handlers
     handlers = 
       Keyword.get(options, :event_handlers, []) 
@@ -729,7 +728,7 @@ defmodule ExIrc.Client do
 
   defp debug(msg) do
     # Erhune
-    trace msg
+    Logger.debug IO.ANSI.format([:magenta, :italic, msg], true), l: String.ljust("irc_client", 12)
     # IO.puts(IO.ANSI.green() <> msg <> IO.ANSI.reset())
   end
 
