@@ -10,6 +10,9 @@ defmodule ExIrc.Client do
 
   alias ExIrc.Client.Transport, as: Transport
 
+  # Erhune:
+  use MMOTG.Logger, default: :irc_client, trace: :all 
+
   # Client internal state
   defmodule ClientState do
     defstruct event_handlers:   [],
@@ -278,6 +281,7 @@ defmodule ExIrc.Client do
   def init(options \\ []) do
     autoping = Keyword.get(options, :autoping, true)
     debug    = Keyword.get(options, :debug, false)
+    tag_process "IrcClient", Keyword.get(options, :id) # Erhune
     # Add event handlers
     handlers = 
       Keyword.get(options, :event_handlers, []) 
@@ -462,7 +466,7 @@ defmodule ExIrc.Client do
   # General handler for messages from the IRC server
   def handle_info({:tcp, _, data}, state) do
     debug? = state.debug?
-    IO.puts "???????????????????? #{data}"
+    # IO.puts "???????????????????? #{data}"
     # IO.puts "!!!!!!!!!!!!!!!!!!!! #{inspect Utils.parse(data)}"
     case Utils.parse(data) do
       %IrcMessage{:ctcp => true} = msg ->
@@ -692,7 +696,7 @@ defmodule ExIrc.Client do
   end
   # Called any time we receive an unrecognized message
   def handle_data(msg, state) do
-    if state.debug? do debug "UNRECOGNIZED MSG: #{msg.cmd}"; IO.inspect(msg) end
+    if state.debug? do debug "UNRECOGNIZED MSG: #{inspect msg}" end # Erhune
     {:noreply, state}
   end
 
@@ -724,7 +728,9 @@ defmodule ExIrc.Client do
   end
 
   defp debug(msg) do
-    IO.puts(IO.ANSI.green() <> msg <> IO.ANSI.reset())
+    # Erhune
+    trace msg
+    # IO.puts(IO.ANSI.green() <> msg <> IO.ANSI.reset())
   end
 
 end
