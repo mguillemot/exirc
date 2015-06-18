@@ -280,7 +280,7 @@ defmodule ExIrc.Client do
   def init(options \\ []) do
     autoping = Keyword.get(options, :autoping, true)
     debug    = Keyword.get(options, :debug, false)
-    Logger.metadata(m: "IrcClient", id: Keyword.get(options, :id)) # Erhune
+    Logger.metadata m: String.ljust("IrcClient", 16), id: String.ljust(Keyword.get(options, :id), 21) # Erhune
     # Add event handlers
     handlers = 
       Keyword.get(options, :event_handlers, []) 
